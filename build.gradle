@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
+}
+
+bootJar.enabled = false // 독립 실행 가능한 Main이 포함된 jar 파일 생성 비활성화.
+
+allprojects {
+    group = "${group}" // gradle.properties 참조
+    version = "${version}" // gradle.properties 참조
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {//프로젝트 빌드 시 컴파일, 테스트, 실행에 사용되는 Java 버전을 명시
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    dependencies {
+
+    }
+}
+
+subprojects {
+    apply plugin: 'java'//컴파일, 테스트, JAR 생성 등 표준 Java 작업을 지원
+    apply plugin: 'java-library'//api와 implementation 의존성을 구분해 하위 모듈 간 의존성을 최적화
+    apply plugin: 'org.springframework.boot'//자동으로 Spring Boot의 빌드 관련 작업(bootJar, bootRun 등)을 추가
+    apply plugin: 'io.spring.dependency-management'//Spring Boot BOM을 통해 의존성 버전 충돌 방지
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

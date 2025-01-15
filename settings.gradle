@@ -1,0 +1,9 @@
+rootProject.name = 'todo-multi'
+include 'core'
+include 'web'
+include 'security'
+include 'data'
+include 'application'
+include 'support:logging'
+include 'support:monitoring'
+
