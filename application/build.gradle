@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(':core')    // Core 모듈 의존
+    implementation project(':data')    // Data 모듈 의존
+    implementation project(':security') // Security 모듈 의존
+    implementation project(':web')     // Web 모듈 의존
+    //implementation project(':support:logging')
+    implementation project(':support:monitoring')
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+bootJar.enabled = true
