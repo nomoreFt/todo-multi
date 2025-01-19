@@ -1,0 +1,27 @@
+version: "3.8" # Compose 파일 버전
+
+services:
+  postgres:
+    container_name: ms_pg_sql
+    image: postgres:latest # 이미지 태그 추가
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: hyunwoo
+      POSTGRES_PASSWORD: hyunwoo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # volumes 이름 수정
+    ports:
+      - "5432:5432" # 포트 매핑
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: ms_mail_dev
+    image: maildev/maildev:latest # 최신 버전 이미지 사용
+    ports:
+      - "1080:1080" # UI 포트
+      - "1025:1025" # SMTP 포트
+    restart: unless-stopped
+
+# volumes 섹션 추가
+volumes:
+  postgres_data: # Postgres 데이터 저장 볼륨

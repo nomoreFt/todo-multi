@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':core') // Core 모듈 의존
+
+    implementation 'org.springframework:spring-tx'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+}

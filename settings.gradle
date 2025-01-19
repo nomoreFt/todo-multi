@@ -6,4 +6,5 @@ include 'data'
 include 'application'
 include 'support:logging'
 include 'support:monitoring'
+include 'notification'
 

@@ -7,7 +7,8 @@ spring:
       #- logging.yml
         #- security.yml
         #- web.yml
-        #- data.yml
+        - data.yaml
+        - notification.yaml
         #- server.yml
         #- cache.yml
         #- messaging.yml
@@ -21,11 +22,14 @@ server:
       min-spare: 100
 
 ---
-spring.config.activate.on-profile: dev
-
-
----
 spring.config.activate.on-profile: prod
 
+
+spring:
+  config:
+    import:
+      - data-prod.yaml
+      - notification-prod.yaml
+  web.resources.add-mappings: false
 
 ---
