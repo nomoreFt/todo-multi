@@ -5,6 +5,7 @@ import com.nomoreft.todoapp.user.domain.UserName;
 
 public record UserPayload(
         UserId id,
-        UserName name
+        UserName name,
+        String email
 ) {
 }

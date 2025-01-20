@@ -15,6 +15,6 @@ public class UserEventPublisher implements EventPublisher {
 
     @Override
     public <T extends ApplicationEvent<?>> void publishEvent(T event) {
-
+        applicationEventPublisher.publishEvent(event);
     }
 }

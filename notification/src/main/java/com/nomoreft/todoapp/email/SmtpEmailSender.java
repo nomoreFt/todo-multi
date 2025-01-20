@@ -18,11 +18,12 @@ public class SmtpEmailSender implements EmailSender {
 
     @Async
     @Override
-    public void sendEmail(String to, String subject, String body) {
+    public void sendEmail(String from, String to, String subject, String body) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
+            helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(body, true); // HTML 지원
