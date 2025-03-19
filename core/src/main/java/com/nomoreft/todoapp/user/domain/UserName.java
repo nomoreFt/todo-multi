@@ -29,10 +29,10 @@ public class UserName extends ValueObject<UserName> {
     public static UserName of(String name) {
         return new UserName(name);
     }
-
+/*
     @Override
     @Transient
     protected Object[] getEqualityFields() {
         return new Object[]{name};
-    }
+    }*/
 }

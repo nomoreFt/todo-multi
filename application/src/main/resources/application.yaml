@@ -1,6 +1,7 @@
 spring.application.name: todoapp
 spring.profiles.active: default
 
+server.port: 9999
 spring:
   config:
     import:

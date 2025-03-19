@@ -9,3 +9,4 @@ dependencies {
 }
 
 bootJar.enabled = true
+

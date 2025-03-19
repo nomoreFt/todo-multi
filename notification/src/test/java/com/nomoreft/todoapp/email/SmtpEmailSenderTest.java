@@ -17,6 +17,8 @@ class SmtpEmailSenderTest {
 
     @Autowired
     private DefaultUserService userService;
+    @Autowired
+    private SmtpEmailSender emailSender;
 
     private static final int TOTAL_EMAILS = 100;
 

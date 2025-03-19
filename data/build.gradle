@@ -5,4 +5,45 @@ dependencies {
 
     runtimeOnly 'org.postgresql:postgresql' // PostgreSQL 드라이버 추가
     runtimeOnly 'com.h2database:h2' // 테스트용 내장형 DB
+
+    implementation 'com.querydsl:querydsl-codegen:5.1.0' // 코드 생성 모듈
+    implementation("io.github.openfeign.querydsl:querydsl-core:6.10.1")
+    implementation("io.github.openfeign.querydsl:querydsl-jpa:6.10.1")
+    annotationProcessor("io.github.openfeign.querydsl:querydsl-apt:6.10.1:jpa")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 }
+
+bootJar.enabled = false
+
+// ### QueryDSL 관련 설정 시작 ###
+// Querydsl Q Class 생성 위치
+def querydslDir = 'src/main/generated'
+
+// java source set 에 Querydsl Q Class 위치 추가
+sourceSets {
+    main.java.srcDirs += [ querydslDir ]
+}
+
+// Querydsl Q Class 생성 Task
+
+task generateQueryDSL(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.nomoreft.todoapp.QuerydslGenerator'
+}
+
+bootRun.dependsOn generateQueryDSL
+tasks.withType(JavaCompile) {
+    mustRunAfter generateQueryDSL
+}
+
+compileJava {
+    dependsOn generateQueryDSL
+    mustRunAfter generateQueryDSL
+}
+
+// gradle clean 시, Q Class가 위치한 디렉토리 삭제
+clean.doLast {
+    file(querydslDir).deleteDir()
+}
+// ### QueryDSL 관련 설정 끝 ###
