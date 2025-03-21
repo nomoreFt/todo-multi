@@ -35,10 +35,17 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
 
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+        implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+        implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+
     }
 }
 

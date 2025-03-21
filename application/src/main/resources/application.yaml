@@ -8,7 +8,7 @@ spring:
       #- logging.yml
         #- security.yml
         #- web.yml
-        - data.yaml
+        # - data.yaml
         - notification.yaml
         #- server.yml
         #- cache.yml
